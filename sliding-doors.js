@@ -1,10 +1,23 @@
 var slidingDoors = (function() {
 
   var doors = document.querySelector('.doors');
+  var button = document.querySelector('button');
+  var main = document.querySelector('main');
 
-  doors.addEventListener('click', toggleOpen);
+  button.addEventListener('click', toggleOpen);
 
-  document.body.addEventListener('scroll', function() {});
+  var lastScrollTop = document.body.scrollTop;
+  document.body.onscroll = function(event) {
+    var newTop = document.body.scrollTop;
+    if (newTop > lastScrollTop) {
+      document.body.scrollTop = document.body.scrollHeight;
+      toggleOpen(true);
+    } else if (newTop < lastScrollTop) {
+      document.body.scrollTop = 0;
+      toggleOpen(false);
+    }
+    lastScrollTop = newTop;
+  };
 
 
   function toggleOpen(open) {
