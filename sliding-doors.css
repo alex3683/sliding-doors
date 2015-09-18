@@ -1,0 +1,61 @@
+main {
+   height: 200%;
+}
+
+.doors, .content {
+   position: fixed;
+   top: 0;
+   bottom: 0;
+   left: 0;
+   right: 0;
+}
+
+.doors {
+   z-index: 1;
+
+   background-color: transparent;
+}
+
+.content {
+   background-color: green;
+
+   opacity: 0;
+   transform-origin: center;
+   transform: scale3d(0.5,0.5,1);
+
+   transition-duration: 1s;
+   transition-property: transform, opacity;
+}
+
+.doors.open + .content {
+   transform: scale3d(1,1,1);
+   opacity: 1;
+}
+
+.door {
+   position: absolute;
+   height: 100%;
+   width: 50%;
+
+   transition: left 1s;
+}
+
+.door:first-child {
+   left: 0;
+
+   background-color: magenta;
+}
+
+.door:last-child {
+   left: 50%;
+
+   background-color: cyan;
+}
+
+.doors.open > .door:first-child {
+   left: -50%;
+}
+
+.doors.open > .door:last-child {
+   left: 100%;
+}
